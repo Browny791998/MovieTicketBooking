@@ -3,7 +3,6 @@ import { auth } from "@/lib/auth";
 import {
   redis,
   seatLockKey,
-  showtimeLockIndexKey,
   lockSeat,
   unlockSeat,
   refreshSeatLock,
