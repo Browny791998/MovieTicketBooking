@@ -1,0 +1,246 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum HallType {
+  STANDARD
+  IMAX
+  FOURDX
+}
+
+enum SeatType {
+  STANDARD
+  PREMIUM
+  RECLINER
+}
+
+enum ShowtimeStatus {
+  SCHEDULED
+  CANCELLED
+  COMPLETED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  REFUNDED
+}
+
+model User {
+  id            String    @id @default(uuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  image         String?
+  role          Role      @default(CUSTOMER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Movie {
+  id             String       @id @default(uuid())
+  title          String
+  genre          String
+  language       String       @default("English")
+  durationMins   Int
+  rating         String
+  posterUrl      String
+  releaseDate    DateTime
+  description    String       @db.Text
+  createdAt      DateTime     @default(now())
+  tmdbId         Int?         @unique
+  imdbId         String?      @unique
+  trailerKey     String?
+  backdropUrl    String?
+  tagline        String?
+  tmdbRating     Float?
+  imdbRating     Float?
+  rottenTomatoes Int?
+  metacritic     Int?
+  boxOffice      String?
+  awards         String?
+  tmdbPopularity Float?
+  enrichedAt     DateTime?
+  showtimes      Showtime[]
+  castMembers    CastMember[]
+
+  @@index([tmdbId])
+  @@index([imdbId])
+}
+
+model CastMember {
+  id         String  @id @default(uuid())
+  movieId    String
+  movie      Movie   @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  tmdbId     Int
+  name       String
+  character  String?
+  profileUrl String?
+  order      Int
+  department String
+  job        String?
+
+  @@index([movieId])
+}
+
+model Theater {
+  id      String @id @default(uuid())
+  name    String
+  city    String
+  address String
+  halls   Hall[]
+}
+
+model Hall {
+  id         String     @id @default(uuid())
+  theaterId  String
+  name       String
+  totalSeats Int
+  hallType   HallType   @default(STANDARD)
+  theater    Theater    @relation(fields: [theaterId], references: [id], onDelete: Cascade)
+  seats      Seat[]
+  showtimes  Showtime[]
+}
+
+model Seat {
+  id            String        @id @default(uuid())
+  hallId        String
+  rowLabel      String
+  seatNumber    Int
+  seatType      SeatType      @default(STANDARD)
+  priceModifier Float         @default(1.0)
+  hall          Hall          @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  bookingSeats  BookingSeat[]
+}
+
+model Showtime {
+  id        String         @id @default(uuid())
+  movieId   String
+  hallId    String
+  startTime DateTime
+  basePrice Float
+  status    ShowtimeStatus @default(SCHEDULED)
+  createdAt DateTime       @default(now())
+  movie     Movie          @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  hall      Hall           @relation(fields: [hallId], references: [id], onDelete: Cascade)
+  bookings  Booking[]
+}
+
+model Booking {
+  id           String        @id @default(uuid())
+  userId       String
+  showtimeId   String
+  status       BookingStatus @default(PENDING)
+  totalAmount    Float
+  reminderSent   Boolean       @default(false)
+  bookedAt     DateTime      @default(now())
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  showtime     Showtime      @relation(fields: [showtimeId], references: [id], onDelete: Cascade)
+  bookingSeats BookingSeat[]
+  payment      Payment?
+}
+
+model BookingSeat {
+  id        String  @id @default(uuid())
+  bookingId String
+  seatId    String
+  price     Float
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  seat      Seat    @relation(fields: [seatId], references: [id], onDelete: Cascade)
+
+  @@unique([bookingId, seatId])
+}
+
+model Payment {
+  id             String        @id @default(uuid())
+  bookingId      String        @unique
+  stripeIntentId String        @unique
+  stripeChargeId String?
+  amount         Float
+  status         PaymentStatus @default(PENDING)
+  paidAt         DateTime?
+  createdAt      DateTime      @default(now())
+  booking        Booking       @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+}
+
+enum PromoType {
+  PERCENTAGE
+  FIXED
+}
+
+enum PromoScope {
+  ALL
+  IMAX
+  FOURDX
+  STANDARD
+}
+
+model PromoCode {
+  id            String     @id @default(uuid())
+  code          String     @unique
+  description   String
+  type          PromoType
+  value         Float
+  scope         PromoScope @default(ALL)
+  minAmount     Float      @default(0)
+  maxUses       Int?
+  usedCount     Int        @default(0)
+  active        Boolean    @default(true)
+  expiresAt     DateTime?
+  createdAt     DateTime   @default(now())
+}

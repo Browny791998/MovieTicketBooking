@@ -1,0 +1,21 @@
+import { NextRequest, NextResponse } from "next/server";
+import { scheduleReminders } from "@/lib/reminder-scheduler";
+
+export const runtime = "nodejs";
+
+export async function GET(req: NextRequest) {
+  const authHeader = req.headers.get("authorization");
+  const cronSecret = process.env.CRON_SECRET;
+
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  try {
+    const sent = await scheduleReminders();
+    return NextResponse.json({ success: true, sent });
+  } catch (err) {
+    console.error("Reminder cron failed:", err);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+  }
+}
