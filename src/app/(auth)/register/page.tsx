@@ -114,7 +114,7 @@ export default function RegisterPage() {
               <Film className="h-5 w-5 text-white" />
             </div>
             <span className="text-2xl font-black tracking-tighter text-white uppercase italic drop-shadow-2xl">
-              CINEMA<span className="text-red-500">PASS</span>
+              DAT<span className="text-red-500">SHIN</span>
             </span>
           </Link>
           <p className="text-zinc-400 font-medium tracking-widest text-[10px] uppercase opacity-70">Join the ultimate cinematic experience</p>
@@ -211,7 +211,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="mt-8 text-center text-[10px] font-bold text-zinc-700 uppercase tracking-[0.3em]">
-          © {new Date().getFullYear()} CinemaPass Ent. All rights reserved.
+          © {new Date().getFullYear()} DatShin. All rights reserved.
         </div>
       </div>
     </div>

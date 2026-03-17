@@ -78,7 +78,7 @@ function LoginForm() {
               <Film className="h-6 w-6 text-white" />
             </div>
             <span className="text-3xl font-black tracking-tighter text-white uppercase italic drop-shadow-2xl">
-              CINEMA<span className="text-red-500">PASS</span>
+              DAT<span className="text-red-500">SHIN</span>
             </span>
           </Link>
           <p className="text-zinc-400 font-medium tracking-wide text-xs uppercase opacity-80">Experience cinema like never before</p>
@@ -156,39 +156,8 @@ function LoginForm() {
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="flex items-center gap-4 my-8">
-            <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-            <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.2em] whitespace-nowrap">Secure Login</span>
-            <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          </div>
-
-          {/* Social */}
-          <div className="grid grid-cols-2 gap-4">
-            <button
-              onClick={() => signIn("google", { callbackUrl })}
-              className="flex items-center justify-center gap-3 h-12 rounded-2xl bg-white/[0.03] border border-white/10 text-sm font-bold text-zinc-300 hover:bg-white/[0.08] hover:text-white transition-all duration-300"
-            >
-              <svg className="h-5 w-5" viewBox="0 0 24 24">
-                <path fill="#EA4335" d="M5.27 9.76A7.08 7.08 0 0 1 12 4.9c1.76 0 3.35.63 4.59 1.67l3.43-3.43A11.97 11.97 0 0 0 12 1C8.13 1 4.73 3.03 2.69 6.08l2.58 3.68Z" />
-                <path fill="#34A853" d="M16.04 18.01A7.06 7.06 0 0 1 12 19.1c-2.84 0-5.28-1.67-6.48-4.12l-2.83 2.18A11.97 11.97 0 0 0 12 23c2.9 0 5.59-1.04 7.65-2.77l-3.61-2.22Z" />
-                <path fill="#4A90D9" d="M19.65 20.23A11.96 11.96 0 0 0 23 13c0-.84-.09-1.65-.25-2.44H12v4.89h6.2a5.2 5.2 0 0 1-2.16 3.34l3.61 2.44Z" />
-                <path fill="#FBBC05" d="M5.52 14.98A7.1 7.1 0 0 1 4.9 12c0-.69.1-1.36.27-2L2.59 6.32A11.93 11.93 0 0 0 1 12c0 1.96.47 3.82 1.3 5.46l3.22-2.48Z" />
-              </svg>
-              Google
-            </button>
-            <button
-              className="flex items-center justify-center gap-3 h-12 rounded-2xl bg-white/[0.03] border border-white/10 text-sm font-bold text-zinc-300 hover:bg-white/[0.08] hover:text-white transition-all duration-300"
-            >
-              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.84 9.49.5.09.68-.22.68-.485v-1.698c-2.782.603-3.37-1.34-3.37-1.34-.455-1.157-1.11-1.464-1.11-1.464-.907-.62.07-.608.07-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.912.832.09-.647.35-1.087.636-1.338-2.22-.252-4.555-1.11-4.555-4.944 0-1.091.39-1.984 1.03-2.683-.104-.253-.448-1.27.096-2.647 0 0 .84-.268 2.75 1.026A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.91-1.294 2.748-1.026 2.748-1.026.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.841-2.337 4.687-4.565 4.935.359.308.678.916.678 1.846v2.738c0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12c0-5.523-4.477-10-10-10Z" />
-              </svg>
-              GitHub
-            </button>
-          </div>
-
-          <p className="text-center text-sm text-zinc-500 mt-10 font-medium">
-            New to CinemaPass?{" "}
+          <p className="text-center text-sm text-zinc-500 mt-8 font-medium">
+            New to DatShin?{" "}
             <Link href="/register" className="text-red-500 hover:text-red-400 font-black transition-colors">
               Create Account
             </Link>
