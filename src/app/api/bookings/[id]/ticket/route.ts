@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth";
 import { buildQRPayload, generateQRBuffer } from "@/lib/qr";
 import type { BookingWithDetails } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { id: string } }

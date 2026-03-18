@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const patchSchema = z.object({
   status: z.enum(["CANCELLED", "COMPLETED"]),
 });

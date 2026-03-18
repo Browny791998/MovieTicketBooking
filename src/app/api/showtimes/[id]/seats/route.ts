@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { getShowtimeLockMap } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(
   _req: NextRequest,
   { params }: { params: { id: string } }

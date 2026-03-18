@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getUserLocksForShowtime, unlockSeat } from "@/lib/redis";
 
+export const dynamic = "force-dynamic";
+
 // GET — get current user's locked seats for a showtime
 export async function GET(req: NextRequest) {
   const session = await auth();

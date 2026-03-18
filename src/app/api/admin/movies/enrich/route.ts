@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { enrichMovie, enrichAllMovies } from "@/lib/movie-enrichment";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 // POST: enrich a single movie
 export async function POST(req: NextRequest) {
   const session = await auth();

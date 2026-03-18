@@ -11,6 +11,8 @@ import {
 } from "@/lib/redis";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 // POST — lock a seat (atomic NX)
 export async function POST(req: NextRequest) {
   const session = await auth();

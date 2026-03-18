@@ -3,6 +3,8 @@ import { requireAdmin } from "@/lib/api-helpers";
 import { searchMovie, getMovieDetails, buildImageUrl } from "@/lib/tmdb";
 import { apiError, apiSuccess } from "@/lib/api-helpers";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   await requireAdmin();
 

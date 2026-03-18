@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth";
 import { redis } from "@/lib/redis";
 import { sendBookingConfirmation } from "@/lib/mail";
 
+export const dynamic = "force-dynamic";
+
 const MAX_RESENDS = 3;
 const WINDOW_SECS = 86400; // 24h
 

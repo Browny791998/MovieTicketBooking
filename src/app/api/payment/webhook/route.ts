@@ -5,6 +5,8 @@ import { unlockAllSeats } from "@/lib/redis";
 import { sendBookingConfirmation } from "@/lib/mail";
 import Stripe from "stripe";
 
+export const dynamic = "force-dynamic";
+
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 const VALID_SEAT_TYPES = ["STANDARD", "PREMIUM", "RECLINER"] as const;
 type SeatType = typeof VALID_SEAT_TYPES[number];
 

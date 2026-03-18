@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth";
 import { enrichMovie } from "@/lib/movie-enrichment";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 // GET: enrichment status for a movie
 export async function GET(
   _req: NextRequest,

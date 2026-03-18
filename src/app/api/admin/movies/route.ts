@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { z } from "zod";
 
+export const dynamic = "force-dynamic";
+
 const movieSchema = z.object({
   title: z.string().min(1, "Title is required"),
   genre: z.string().min(1, "Genre is required"),
