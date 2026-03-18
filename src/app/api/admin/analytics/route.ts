@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-
-export const dynamic = "force-dynamic";
 import {
   startOfDay, endOfDay,
   startOfMonth, endOfMonth,
   startOfYear, endOfYear,
   subMonths, format,
 } from "date-fns";
+
+export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
