@@ -31,7 +31,7 @@ const nextConfig = {
     ],
   },
   // Stripe requires raw body for webhook
-  serverExternalPackages: ["bcryptjs", "nodemailer"],
+  serverExternalPackages: ["bcryptjs", "nodemailer", "@prisma/client", "prisma"],
 };
 
 export default nextConfig;
