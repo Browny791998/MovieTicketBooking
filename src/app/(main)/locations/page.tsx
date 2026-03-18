@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 import { MapPin, Clock, Phone, Train, Layers, Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
