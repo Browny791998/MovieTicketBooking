@@ -8,6 +8,8 @@ import { TheaterCard } from "@/components/movies/TheaterCard";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CalendarDays, Building2 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 const getNowShowingMovies = cache(async () => {
   return prisma.movie.findMany({
     where: {

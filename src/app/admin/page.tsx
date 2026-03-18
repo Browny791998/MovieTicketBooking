@@ -5,6 +5,8 @@ import { Ticket, DollarSign, Film, Users, TrendingUp, CalendarDays, BarChart3 } 
 import { startOfDay, endOfDay, startOfMonth, endOfMonth, startOfYear, endOfYear } from "date-fns";
 import { cn } from "@/lib/utils";
 
+export const dynamic = "force-dynamic";
+
 async function getDashboardData() {
   const today = new Date();
   const dayStart = startOfDay(today);

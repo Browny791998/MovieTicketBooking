@@ -4,6 +4,8 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { SeatSelectionClient } from "@/components/seats/SeatSelectionClient";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: { id: string; showtimeId: string };
 }

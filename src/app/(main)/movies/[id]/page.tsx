@@ -7,6 +7,8 @@ import { MovieCard } from "@/components/movies/MovieCard";
 import { ShowtimeDateTabs } from "@/components/movies/ShowtimeDateTabs";
 import { CalendarDays } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 interface Props {
   params: { id: string };
 }

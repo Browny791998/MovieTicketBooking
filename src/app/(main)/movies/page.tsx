@@ -6,6 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Film } from "lucide-react";
 import { Prisma } from "@prisma/client";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   searchParams: {
     genre?: string;
